@@ -3,7 +3,6 @@ export interface LoginRequest {
   password: string
 }
 export interface LoginResult {
-  username: string
+  username: string | null
   isAuthenticated: boolean
 }
-

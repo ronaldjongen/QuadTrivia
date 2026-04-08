@@ -24,7 +24,6 @@ export const useAuthStore = defineStore('auth', {
       this.error = null
 
       try {
-        //const me ={ authenticated: true, username: 'test'}
         const me = await getLoginResult()
         this.username = me.isAuthenticated ? me.username : null
         this.isAuthenticated = me.isAuthenticated
