@@ -3,7 +3,7 @@ import type {
   QuestionsResponse,
   CheckAnswersRequest,
   CheckAnswersResponse,
-} from '../types/quiz'
+} from '../data/quiz'
 
 export async function getQuestions(): Promise<QuestionsResponse> {
   const response = await api.get<QuestionsResponse>('/questions')

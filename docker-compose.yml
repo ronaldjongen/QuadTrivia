@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: quad-trivia-backend
+    environment:
+      APP_DEMO_PASSWORD_HASH: ${APP_DEMO_PASSWORD_HASH}
+      SPRING_PROFILES_ACTIVE: docker
+    expose:
+      - "8080"
+
+  frontend:
+    build:
+      context: ./quad-trivia-frontend
+      dockerfile: Dockerfile
+    container_name: quad-trivia-frontend
+    expose:
+      - "80"
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: quad-trivia-nginx
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro

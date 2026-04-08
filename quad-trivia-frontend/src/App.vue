@@ -1,12 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <template>
-
+  <main class="app-shell">
+    <RouterView />
+  </main>
 </template>
-<main class="app-shell">
-<RouterView />
-</main>
-<style scoped></style>
+
 <style scoped>
 .app-shell {
   min-height: 100vh;
