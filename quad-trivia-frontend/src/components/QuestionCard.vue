@@ -11,11 +11,16 @@ defineProps<{
 const emit = defineEmits<{
   (e: 'select', optionId: string): void
 }>()
+function decodeHtml(html: string): string {
+  const txt = document.createElement('textarea')
+  txt.innerHTML = html
+  return txt.value
+}
 </script>
 
 <template>
   <article class="question-card">
-    <h2>{{ question.text }}</h2>
+    <h2>{{ decodeHtml(question.text) }}</h2>
 
     <label v-for="option in question.options" :key="option.id" class="option">
       <input
