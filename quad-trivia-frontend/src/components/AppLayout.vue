@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { useAuthStore } from '../stores/authenticationStore'
 import { RoutePath } from '../router/routePath'
+import { useRouter } from 'vue-router'
+
 const authStore = useAuthStore()
+const router = useRouter()
 
 async function logout() {
-  await authStore.logout()
-  window.location.href = RoutePath.Loginroute
+  try {
+    await authStore.logout()
+  } finally {
+    await router.push(RoutePath.Login)
+  }
 }
 </script>
 
@@ -15,8 +21,8 @@ async function logout() {
       <div class="logo">Quad Trivia</div>
 
       <div class="actions">
-        <span class="user">{{ authStore.username }}</span>
-        <button class="logout" @click="logout">
+        <span data-testid="current-user" class="user">{{ authStore.username }}</span>
+        <button data-testid="logout-button" class="logout" @click="logout">
           Logout
         </button>
       </div>
