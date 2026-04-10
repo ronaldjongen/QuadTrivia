@@ -1,1 +1,26 @@
-/node_modules/*
+# OS / Editor
+.DS_Store
+.idea/
+.vscode/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Frontend build artifacts
+quad-trivia-frontend/dist/
+quad-trivia-frontend/coverage/
+quad-trivia-frontend/*.tsbuildinfo
+quad-trivia-frontend/.eslintcache
+
+# Backend build artifacts
+backend/.gradle/
+backend/build/
+
+# Runtime files
+*.log
+*.pid
+trivia-cache.yaml
