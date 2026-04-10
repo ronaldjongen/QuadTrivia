@@ -36,13 +36,14 @@ describe('LoginView', () => {
 
     const wrapper = mount(LoginView)
 
-    const [usernameInput, passwordInput] = wrapper.findAll('input')
+    const usernameInput = wrapper.get('input[type="text"]')
+    const passwordInput = wrapper.get('input[type="password"]')
     await usernameInput.setValue('demo-user')
     await passwordInput.setValue('demo-password')
     await wrapper.find('form').trigger('submit.prevent')
 
     expect(login).toHaveBeenCalledWith('demo-user', 'demo-password')
-    expect(push).toHaveBeenCalledWith(RoutePath.Quizroute)
+    expect(push).toHaveBeenCalledWith(RoutePath.Quiz)
   })
 
   it('does not navigate when login fails', async () => {
@@ -50,7 +51,8 @@ describe('LoginView', () => {
 
     const wrapper = mount(LoginView)
 
-    const [usernameInput, passwordInput] = wrapper.findAll('input')
+    const usernameInput = wrapper.get('input[type="text"]')
+    const passwordInput = wrapper.get('input[type="password"]')
     await usernameInput.setValue('demo-user')
     await passwordInput.setValue('wrong-password')
     await wrapper.find('form').trigger('submit.prevent')
