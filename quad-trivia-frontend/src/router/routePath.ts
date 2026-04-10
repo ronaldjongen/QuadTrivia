@@ -1,7 +1,7 @@
 export const RoutePath = {
-  Loginroute: '/login',
-  Quizroute: '/quiz',
-  Resultroute: '/result',
+  Login: '/login',
+  Quiz: '/quiz',
+  Result: '/result',
 } as const
 
 export type RoutePathValue = (typeof RoutePath)[keyof typeof RoutePath]

@@ -2,7 +2,9 @@
 import { useAuthStore } from '../stores/authenticationStore'
 import { RoutePath } from '../router/routePath'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const authStore = useAuthStore()
 const router = useRouter()
 
@@ -23,7 +25,7 @@ async function logout() {
       <div class="actions">
         <span data-testid="current-user" class="user">{{ authStore.username }}</span>
         <button data-testid="logout-button" class="logout" @click="logout">
-          Logout
+          {{ t('auth.logout') }}
         </button>
       </div>
     </header>

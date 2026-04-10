@@ -19,22 +19,19 @@ function decodeHtml(html: string): string {
 </script>
 
 <template>
-  <article class="question-card">
+  <article class="question-card" data-testid="question-card">
     <h2>{{ decodeHtml(question.text) }}</h2>
 
     <label v-for="option in question.options" :key="option.id" class="option">
       <input
+        data-testid="question-option"
         type="radio"
         :name="question.id"
         :value="option.id"
         :checked="selectedOptionId === option.id"
         @change="emit('select', option.id)"
       />
-      <span>{{ option.text }}</span>
+      <span>{{ decodeHtml(option.text) }}</span>
     </label>
   </article>
 </template>
-
-<style scoped>
-
-</style>

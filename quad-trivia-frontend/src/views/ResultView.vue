@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import {computed} from 'vue'
-import {useRouter} from 'vue-router'
-import {useQuizStore} from '../stores/quizStore'
-import {RoutePath} from '../router/routePath'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { useQuizStore } from '../stores/quizStore'
+import { RoutePath } from '../router/routePath'
 import AppLayout from '../components/AppLayout.vue'
 
+const { t } = useI18n()
 const quizStore = useQuizStore()
 const router = useRouter()
 
@@ -17,7 +19,7 @@ function getQuestionText(questionId: string): string {
 
 function playAgain() {
   quizStore.$reset()
-  router.push(RoutePath.Quizroute)
+  router.push(RoutePath.Quiz)
 }
 function decodeHtml(html: string): string {
   const txt = document.createElement('textarea')
@@ -30,20 +32,20 @@ function decodeHtml(html: string): string {
   <AppLayout>
     <section class="result-container">
       <div class="result-card">
-        <h1>Quiz Results</h1>
+        <h1>{{ t('result.title') }}</h1>
         <template v-if="summary">
-          <p>Score:{{ summary.score }}</p>
-          <p>Your score: {{ summary.score }} / {{ summary.total }}</p>
-          <ul>
-            <li v-for="result in summary.results" :key="result.questionId">
+          <p data-testid="result-score">Score:{{ summary.score }}</p>
+          <p data-testid="result-total">Your score: {{ summary.score }} / {{ summary.total }}</p>
+          <ul data-testid="result-list">
+            <li v-for="result in summary.results" :key="result.questionId" data-testid="result-item">
               {{ decodeHtml(getQuestionText(result.questionId)) }} - {{
-                result.correct ? 'Correct' : 'Incorrect'
+                result.correct ? t('result.correct') : t('result.incorrect')
               }}
             </li>
           </ul>
-          <button class="primary" @click="playAgain">Probeer opnieuw</button>
+          <button data-testid="result-play-again" class="primary" @click="playAgain">{{ t('result.playAgain') }}</button>
         </template>
-        <p v-else>Geen resultaat beschikbaar.</p>
+        <p v-else data-testid="result-empty">{{ t('result.noResult') }}</p>
       </div>
     </section>
   </AppLayout>

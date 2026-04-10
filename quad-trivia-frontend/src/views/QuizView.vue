@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import {onMounted} from 'vue'
-import {useRouter} from 'vue-router'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import QuestionCard from '../components/QuestionCard.vue'
-import {useQuizStore} from '../stores/quizStore'
-import {RoutePath} from '../router/routePath'
+import { useQuizStore } from '../stores/quizStore'
+import { RoutePath } from '../router/routePath'
 import AppLayout from '../components/AppLayout.vue'
 
+const { t } = useI18n()
 const quizStore = useQuizStore()
 const router = useRouter()
 
@@ -17,16 +19,16 @@ onMounted(async () => {
 
 async function onSubmit() {
   await quizStore.submitAnswers()
-  await router.push(RoutePath.Resultroute)
+  await router.push(RoutePath.Result)
 }
 </script>
 
 <template>
   <AppLayout>
     <section class="quiz-container">
-      <h1>Trivia Quiz</h1>
-      <p v-if="quizStore.loading">Wachten a.u.b. de vragen worden geladen...</p>
-      <p v-else-if="quizStore.error">Er is een fout opgetreden bij het laden van de vragen.</p>
+      <h1>{{ t('quiz.title') }}</h1>
+      <p v-if="quizStore.loading" data-testid="quiz-loading">{{ t('quiz.loading') }}</p>
+      <p v-else-if="quizStore.error" data-testid="quiz-error">{{ t('result.error') }}</p>
       <form v-else-if="quizStore.questions.length" @submit.prevent="onSubmit">
         <div class="questions">
           <Question-card v-for="question in quizStore.questions"
@@ -35,8 +37,8 @@ async function onSubmit() {
                          @select="quizStore.setAnswer(question.id, $event)">
           </Question-card>
         </div>
-        <button class="primary" type="submit" :disabled="quizStore.loading">
-          Opslaan
+        <button data-testid="quiz-submit" class="primary" type="submit" :disabled="quizStore.loading">
+          {{ t('quiz.submit') }}
         </button>
       </form>
     </section>

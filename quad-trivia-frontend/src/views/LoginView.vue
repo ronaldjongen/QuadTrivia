@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import {reactive} from 'vue'
-import {useRouter} from 'vue-router'
-import {useAuthStore} from '../stores/authenticationStore'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/authenticationStore'
 import { RoutePath } from '../router/routePath'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const router = useRouter()
 const authStore = useAuthStore()
 const form = reactive({
@@ -12,11 +15,9 @@ const form = reactive({
 
 async function onSubmit() {
   try {
-    await authStore.login(form.username, form.password)
-    await router.push(RoutePath.Quizroute)
-  } catch (error) {
-    console.log(error)
-  }
+    await authStore.login(form.username.trim(), form.password)
+    await router.push(RoutePath.Quiz)
+  } catch {}
 }
 </script>
 
@@ -27,22 +28,21 @@ async function onSubmit() {
         <p class="eyebrow">Quad Trivia</p>
         <h1>Secure trivia demo</h1>
         <p class="brand-copy">
-          Log in om de quiz te starten. Een compacte demo met Vue, Spring Boot
-          en session-based authentication.
+          {{t('auth.brand') }}
         </p>
 
         <div class="brand-points">
           <div class="point">
             <strong>Secure session auth</strong>
-            <span>Geen JWT in de browseropslag.</span>
+            <span>{{ t('auth.brandPointJWT') }}</span>
           </div>
           <div class="point">
             <strong>Server-side validation</strong>
-            <span>Correcte antwoorden blijven in de backend.</span>
+            <span>{{ t('auth.brandPointServerSide') }}</span>
           </div>
           <div class="point">
             <strong>Clean demo flow</strong>
-            <span>Login, quiz, resultaat.</span>
+            <span>{{ t('auth.brandPointnCleanFlow') }}</span>
           </div>
         </div>
       </aside>
@@ -50,42 +50,44 @@ async function onSubmit() {
       <div class="card-panel">
         <form class="login-card" @submit.prevent="onSubmit">
           <div class="card-header">
-            <p class="card-kicker">Welkom</p>
+            <p class="card-kicker">{{ t('auth.welcome') }}</p>
             <h2>Start de demo</h2>
             <p class="card-copy">
-              Meld je aan met je demo-account om verder te gaan.
+              {{t('auth.intro') }}
             </p>
           </div>
 
           <label class="field">
-            <span>Username</span>
+            <span>{{ t('auth.username') }}</span>
             <input
+              data-testid="login-username"
               v-model="form.username"
               type="text"
-              autocomplete="username"
+              autocomplete="{{t('auth.username')}}"
               placeholder="demo"
             />
           </label>
 
           <label class="field">
-            <span>Password</span>
+            <span>{{ t('auth.password') }}</span>
             <input
+              data-testid="login-password"
               v-model="form.password"
               type="password"
               autocomplete="current-password"
               placeholder="••••••••"
             />
           </label>
-          <button class="submit-button" type="submit" :disabled="authStore.loading">
-            {{ authStore.loading ? 'Bezig...' : 'Inloggen' }}
+          <button data-testid="login-submit" class="submit-button" type="submit" :disabled="authStore.loading">
+            {{ authStore.loading ? t('auth.busy') :     t('auth.submit')  }}
           </button>
 
-          <p v-if="authStore.error" class="error-message">
+          <p v-if="authStore.error" data-testid="login-error" class="error-message">
             {{ authStore.error }}
           </p>
 
           <p class="helper-text">
-            Gebruik het demo-account dat in je backend-configuratie is ingesteld.
+            {{ t('auth.helper') }}
           </p>
         </form>
       </div>

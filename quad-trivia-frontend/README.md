@@ -1,54 +1,48 @@
-# quad-trivia-frontend
+# Quad Trivia Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue 3 + TypeScript single-page app for login, quiz flow, and results.
 
-## Recommended IDE Setup
+## Scripts
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- `npm run dev`: start local dev server
+- `npm run test:unit -- --run`: run unit/integration tests
+- `npm run test:e2e`: run Playwright E2E tests
+- `npm run type-check`: run Vue TypeScript checks
+- `npm run lint`: run lint checks
+- `npm run build`: production build
 
-## Recommended Browser Setup
+## Architecture
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- `src/views`: route-level screens (`Login`, `Quiz`, `Result`)
+- `src/stores`: Pinia stores for auth and quiz state
+- `src/api`: typed API layer over Axios
+- `src/router`: route definitions + auth guard
+- `src/__tests__`: view/store/router tests
 
-## Type Support for `.vue` Imports in TS
+## Contract Notes
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- API base URL: `/api`
+- Credentials are included for session cookies (`withCredentials: true`)
+- Result payload only exposes per-question correctness, not correct option IDs
 
-## Customize configuration
+## Playwright
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Playwright expects a running app (default `http://localhost:8080`).
 
-## Project Setup
+First-time local setup:
 
-```sh
-npm install
+```bash
+npm run test:e2e:install
 ```
 
-### Compile and Hot-Reload for Development
+Environment variables:
 
-```sh
-npm run dev
-```
+- `E2E_BASE_URL` (default: `http://localhost:8080`)
+- `E2E_USERNAME` (default: `demo`)
+- `E2E_PASSWORD` (default: `demo123`)
 
-### Type-Check, Compile and Minify for Production
+Example:
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+```bash
+E2E_BASE_URL=http://localhost:8080 npm run test:e2e
 ```
