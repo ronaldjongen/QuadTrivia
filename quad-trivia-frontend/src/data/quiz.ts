@@ -27,7 +27,6 @@ export interface CheckAnswersRequest {
 export interface QuestionResult {
   questionId: string
   correct: boolean
-  correctOptionId: string
 }
 
 export interface CheckAnswersResponse {

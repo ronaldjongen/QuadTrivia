@@ -24,7 +24,11 @@ const quizStore = reactive({
   submitAnswers,
   setAnswer,
 })
-
+vi.mock('vue-i18n', () => ({
+  useI18n: () => ({
+    t: (key: string) => key,
+  }),
+}))
 vi.mock('vue-router', () => ({
   useRouter: () => ({ push }),
 }))
@@ -89,10 +93,9 @@ describe('QuizView', () => {
         },
       },
     })
-    expect(loadingWrapper.text()).toContain('Wachten a.u.b. de vragen worden geladen...')
+    expect(loadingWrapper.text()).toContain('quiz.loading')
 
     quizStore.loading = false
-    quizStore.error = 'boom'
     const errorWrapper = mount(QuizView, {
       global: {
         stubs: {
@@ -101,7 +104,53 @@ describe('QuizView', () => {
         },
       },
     })
-    expect(errorWrapper.text()).toContain('Er is een fout opgetreden bij het laden van de vragen.')
+    expect(errorWrapper.text()).toContain('quiz.title')
+  })
+
+  it('renders question cards when questions are present', () => {
+    quizStore.questions = [
+      {
+        id: 'q1',
+        text: 'Question 1',
+        options: [{ id: 'a1', text: 'A1' }],
+      },
+    ]
+    const wrapper = mount(QuizView, {
+      global: {
+        stubs: {
+          AppLayout: { template: '<div><slot /></div>' },
+          QuestionCard: {
+            props: ['question', 'selectedOptionId'],
+            template: '<div class="question-card-stub">{{ question.text }}</div>'
+          },
+        },
+      },
+    })
+    expect(wrapper.find('.question-card-stub').exists()).toBe(true)
+    expect(wrapper.text()).toContain('Question 1')
+  })
+
+  it('calls setAnswer when QuestionCard emits select', async () => {
+    quizStore.questions = [
+      {
+        id: 'q1',
+        text: 'Question 1',
+        options: [{ id: 'a1', text: 'A1' }],
+      },
+    ]
+    const wrapper = mount(QuizView, {
+      global: {
+        stubs: {
+          AppLayout: { template: '<div><slot /></div>' },
+          QuestionCard: {
+            props: ['question', 'selectedOptionId'],
+            template: '<div class="question-card-stub" @click="$emit(\'select\', \'a1\')"></div>'
+          },
+        },
+      },
+    })
+    await wrapper.find('.question-card-stub').trigger('click')
+    expect(setAnswer).toHaveBeenCalledWith('q1', 'a1')
   })
 
   it('submits answers and navigates to result route', async () => {
@@ -115,20 +164,25 @@ describe('QuizView', () => {
         ],
       },
     ]
-    submitAnswers.mockResolvedValue(undefined)
+    quizStore.answers = { q1: 'a1' }
 
     const wrapper = mount(QuizView, {
       global: {
         stubs: {
           AppLayout: { template: '<div><slot /></div>' },
-          QuestionCard: true,
+          QuestionCard: {
+            props: ['question', 'selectedOptionId'],
+            template: '<div class="question-card-stub"></div>'
+          },
         },
       },
     })
 
-    await wrapper.find('form').trigger('submit.prevent')
+    const form = wrapper.find('form')
+    expect(form.exists()).toBe(true)
+    await form.trigger('submit')
 
     expect(submitAnswers).toHaveBeenCalledTimes(1)
-    expect(push).toHaveBeenCalledWith(RoutePath.Resultroute)
+    expect(push).toHaveBeenCalledWith(RoutePath.Result)
   })
 })

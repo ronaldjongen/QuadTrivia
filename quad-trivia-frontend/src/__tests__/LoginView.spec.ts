@@ -16,6 +16,19 @@ const authStore = reactive({
   login,
 })
 
+
+const mountLoginView = () =>
+  mount(LoginView, {
+    global: {
+      //plugins: [i18n],
+    },
+  })
+
+vi.mock('vue-i18n', () => ({
+  useI18n: () => ({
+    t: (key: string) => key,
+  }),
+}))
 vi.mock('vue-router', () => ({
   useRouter: () => ({ push }),
 }))
@@ -34,7 +47,7 @@ describe('LoginView', () => {
   it('submits credentials and navigates to quiz route on successful login', async () => {
     login.mockResolvedValue(undefined)
 
-    const wrapper = mount(LoginView)
+    const wrapper =mountLoginView()
 
     const usernameInput = wrapper.get('input[type="text"]')
     const passwordInput = wrapper.get('input[type="password"]')
@@ -49,7 +62,7 @@ describe('LoginView', () => {
   it('does not navigate when login fails', async () => {
     login.mockRejectedValue(new Error('Invalid credentials'))
 
-    const wrapper = mount(LoginView)
+    const wrapper  =mountLoginView()
 
     const usernameInput = wrapper.get('input[type="text"]')
     const passwordInput = wrapper.get('input[type="password"]')
@@ -63,17 +76,17 @@ describe('LoginView', () => {
   it('renders loading state and disables submit button while authenticating', async () => {
     authStore.loading = true
 
-    const wrapper = mount(LoginView)
+    const wrapper  = mountLoginView()
     const submit = wrapper.find('button[type="submit"]')
 
     expect(submit.attributes('disabled')).toBeDefined()
-    expect(submit.text()).toContain('Bezig...')
+    expect(submit.text()).toContain('auth.busy')
   })
 
   it('shows backend error message when present in store', () => {
     authStore.error = 'Inloggen mislukt'
 
-    const wrapper = mount(LoginView)
+    const wrapper  =mountLoginView()
 
     expect(wrapper.text()).toContain('Inloggen mislukt')
   })

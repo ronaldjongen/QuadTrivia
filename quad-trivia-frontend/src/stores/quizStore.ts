@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import { checkAnswers, getQuestions } from '../api/quizApi'
+import { i18n } from '../i18n'
+
 import type {
   CheckAnswersResponse,
   Question,
@@ -13,6 +15,10 @@ interface QuizState {
   result: CheckAnswersResponse | null
   loading: boolean
   error: string | null
+}
+
+function t(key: string, values: Record<string, unknown> = {}) {
+  return String(i18n.global.t(key, values))
 }
 
 export const useQuizStore = defineStore('quiz', {
@@ -37,7 +43,7 @@ export const useQuizStore = defineStore('quiz', {
         this.quizId = data.quizId
         this.questions = data.questions
       } catch {
-        this.error = 'Vragen ophalen mislukt'
+        this.error = t('quiz.error')
       } finally {
         this.loading = false
       }
@@ -49,7 +55,15 @@ export const useQuizStore = defineStore('quiz', {
 
     async submitAnswers() {
       if (!this.quizId) {
-        throw new Error('Geen actieve quiz')
+        throw new Error(t('quiz.noActiveQuiz'))
+      }
+      const answeredCount = Object.keys(this.answers).length
+      if (answeredCount !== this.questions.length) {
+        this.result = null
+        this.error = t('quiz.notAllQuestionsAnswered', {
+          count: this.questions.length - answeredCount,
+        })
+        throw new Error(t('quiz.inComplete'))
       }
 
       this.loading = true
@@ -68,7 +82,7 @@ export const useQuizStore = defineStore('quiz', {
           answers: payload,
         })
       } catch {
-        this.error = 'Antwoorden indienen mislukt'
+        this.error = t('quiz.submittingAnswerFailed')
         throw new Error('Submit failed')
       } finally {
         this.loading = false

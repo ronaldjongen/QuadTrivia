@@ -50,7 +50,7 @@ describe('quizStore', () => {
 
     await store.fetchQuestions()
 
-    expect(store.error).toBe('Vragen ophalen mislukt')
+    expect(store.error).toBe('Error loading questions.')
     expect(store.loading).toBe(false)
   })
 
@@ -65,7 +65,7 @@ describe('quizStore', () => {
   it('submitAnswers throws when no active quiz exists', async () => {
     const store = useQuizStore()
 
-    await expect(store.submitAnswers()).rejects.toThrow('Geen actieve quiz')
+    await expect(store.submitAnswers()).rejects.toThrow('No active quiz.')
   })
 
   it('submitAnswers sends mapped payload and stores result', async () => {
@@ -73,13 +73,17 @@ describe('quizStore', () => {
       score: 1,
       total: 2,
       results: [
-        { questionId: 'q1', correct: true, correctOptionId: 'a1' },
-        { questionId: 'q2', correct: false, correctOptionId: 'b2' },
+        { questionId: 'q1', correct: true },
+        { questionId: 'q2', correct: false },
       ],
     })
 
     const store = useQuizStore()
     store.quizId = 'quiz-77'
+    store.questions = [
+      { id: 'q1', text: 'Question 1', options: [] },
+      { id: 'q2', text: 'Question 2', options: [] },
+    ]
     store.answers = {
       q1: 'a1',
       q2: 'b1',
@@ -104,11 +108,12 @@ describe('quizStore', () => {
 
     const store = useQuizStore()
     store.quizId = 'quiz-99'
+    store.questions = [{ id: 'q1', text: 'Question 1', options: [] }]
     store.answers = { q1: 'a1' }
 
     await expect(store.submitAnswers()).rejects.toThrow('Submit failed')
 
-    expect(store.error).toBe('Antwoorden indienen mislukt')
+    expect(store.error).toBe('Submitting answer failed')
     expect(store.loading).toBe(false)
   })
 })

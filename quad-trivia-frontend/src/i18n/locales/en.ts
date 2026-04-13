@@ -24,15 +24,25 @@ export default {
     title: 'Trivia Quiz',
     loading: 'Please wait for questions to load...',
     submit: 'Submit',
-
     error: 'Error loading questions.',
+    noActiveQuiz:'No active quiz.',
+    notAllQuestionsAnswered:'Answer all questions.',
+    inComplete:'Incomplete quiz',
+    submittingAnswerFailed:'Submitting answer failed'
   },
   result: {
     title: 'Quiz Results',
     score: 'Score: {score} / {total}',
     noResult: 'No result available.',
+    noResultText:'Complete a quiz first to see your results here.',
     correct: 'Correct',
     playAgain: 'New quiz',
     incorrect: 'Incorrect',
+    strongResult:'Strong result',
+    decentResult:'Decent result',
+    needsImprovement:'Needs improvement',
+    subtitle:'Review your score and the result for each question.',
+    finalScore:'Final score',
+
   },
 }
