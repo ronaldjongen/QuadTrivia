@@ -48,7 +48,7 @@ Frontend uses `/api` as base URL and expects the backend on the same origin in D
 
 ## Docker Run
 
-1. Create `.env` in project root if not already present and add the following line:
+1. Create `.env` in project root if the file is not already present and add the following line:
 
 ```env
 APP_DEMO_PASSWORD_HASH=$2b$12$replace_with_real_bcrypt_hash
