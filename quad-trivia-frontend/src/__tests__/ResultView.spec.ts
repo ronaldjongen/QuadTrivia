@@ -32,7 +32,7 @@ const mountResultView = () =>
 
 vi.mock('vue-i18n', () => ({
   useI18n: () => ({
-    t: (key: string, params?: any) => {
+    t: (key: string, params?: string) => {
       if (params) {
         let res = key
         for (const [k, v] of Object.entries(params)) {
