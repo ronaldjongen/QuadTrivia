@@ -5,9 +5,10 @@ const baseURL = process.env.E2E_BASE_URL ?? 'http://localhost:8080'
 export default defineConfig({
   testDir: './e2e',
   timeout: 30_000,
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
+  workers: 1,
   reporter: process.env.CI ? [['html', { open: 'never' }], ['list']] : [['list']],
   use: {
     baseURL,
