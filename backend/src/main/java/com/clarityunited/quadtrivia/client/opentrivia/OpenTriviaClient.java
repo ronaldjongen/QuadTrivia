@@ -10,10 +10,6 @@ import reactor.core.scheduler.Schedulers;
 
 import java.time.Duration;
 
-/**
- * OpenTrivia API Client with fallback caching.
- * Follows Clean Code by separating concerns and providing a clear API.
- */
 @Component
 public class OpenTriviaClient {
 

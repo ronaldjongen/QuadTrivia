@@ -25,11 +25,6 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
-    @GetMapping("/csrf")
-    public CsrfToken csrf(CsrfToken csrfToken) {
-        return csrfToken;
-    }
-
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request,
             HttpServletRequest httpRequest,
@@ -74,4 +69,9 @@ public class AuthenticationController {
         log.debug("Authentication status requested for username='{}'", authentication.getName());
         return new LoginResult(authentication.getName(), true);
     }
+    @GetMapping("/csrf")
+    public CsrfToken csrf(CsrfToken csrfToken) {
+        return csrfToken;
+    }
+
 }
