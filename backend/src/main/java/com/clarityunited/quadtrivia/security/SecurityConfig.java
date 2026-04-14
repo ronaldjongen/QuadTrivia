@@ -22,7 +22,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, QuizService quizService) throws Exception {
         http
-                //.csrf(AbstractHttpConfigurer::disable)
                 .csrf(csrf -> csrf.spa())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login").permitAll()
