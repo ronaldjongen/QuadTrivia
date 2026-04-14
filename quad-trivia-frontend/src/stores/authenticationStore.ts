@@ -45,7 +45,9 @@ export const useAuthStore = defineStore('auth', {
       this.error = null
 
       try {
+        await ensureCsrf()
         await login({ username, password })
+        await ensureCsrf()
         await this.fetchMe()
       } catch {
         this.error = 'Inloggen mislukt'
