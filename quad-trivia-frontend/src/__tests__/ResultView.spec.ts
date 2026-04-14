@@ -91,7 +91,7 @@ describe('ResultView', () => {
     expect(wrapper.text()).toContain('100% result.correct')
     // HTML entity &amp; should be decoded to &
     expect(wrapper.text()).toContain('What is 2 & 2?')
-    expect(wrapper.find('.status-pill').text()).toBe('Correct')
+    expect(wrapper.find('.status-pill').text()).toBe('result.correct')
   })
 
   it('shows Strong result label and good score class for high scores', () => {
@@ -101,8 +101,8 @@ describe('ResultView', () => {
       results: [],
     }
     const wrapper = mountResultView()
-    expect(wrapper.text()).toContain('Strong result')
-    expect(wrapper.find('.score-hero').classes()).toContain('score-good')
+    expect(wrapper.text()).toContain('result.strongResult')
+    expect(wrapper.find('.score-personal').classes()).toContain('score-good')
   })
 
   it('shows Decent result label and medium score class for average scores', () => {
@@ -112,8 +112,8 @@ describe('ResultView', () => {
       results: [],
     }
     const wrapper = mountResultView()
-    expect(wrapper.text()).toContain('Decent result')
-    expect(wrapper.find('.score-hero').classes()).toContain('score-medium')
+    expect(wrapper.text()).toContain('result.decentResult')
+    expect(wrapper.find('.score-personal').classes()).toContain('score-medium')
   })
 
   it('shows Needs improvement label and low score class for low scores', () => {
@@ -123,8 +123,8 @@ describe('ResultView', () => {
       results: [],
     }
     const wrapper = mountResultView()
-    expect(wrapper.text()).toContain('Needs improvement')
-    expect(wrapper.find('.score-hero').classes()).toContain('score-low')
+    expect(wrapper.text()).toContain('result.needsImprovement')
+    expect(wrapper.find('.score-personal').classes()).toContain('score-low')
   })
 
   it('resets quiz and routes back to quiz when user clicks play again', async () => {

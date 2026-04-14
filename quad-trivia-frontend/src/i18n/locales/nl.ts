@@ -1,9 +1,11 @@
 export default {
   app: {
     title: 'Quad Trivia',
+    description: 'Secure trivia demo',
+
   },
   auth: {
-    welkom: 'Welkom bij Quad Trivia!',
+    welcome: 'Welkom bij Quad Trivia!',
     loginTitle: 'Inloggen',
     username: 'Gebruikersnaam',
     password: 'Wachtwoord',
@@ -34,7 +36,7 @@ export default {
     score: 'Score: {score} / {total}',
     noResult: 'Geen resultaat beschikbaar.',
     noResultText:'Maak eerst een quiz af om je resultaten te zien.',
-    correct: 'Juist',
+    correct: 'Goed',
     playAgain: 'Nieuwe quiz',
     incorrect: 'Fout',
     strongResult:'Sterk resultaat',
@@ -42,5 +44,7 @@ export default {
     needsImprovement:'Moet worden verbeterd',
     subtitle:'Bekijk je score en het resultaat voor elke vraag.',
     finalScore:'Eindscore',
+    perQuestion:'Per vraag',
+    evaluatedItems:'Geëvalueerde items',
   },
 }

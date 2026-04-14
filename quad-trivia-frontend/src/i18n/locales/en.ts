@@ -1,6 +1,7 @@
 export default {
   app: {
     title: 'Quad Trivia',
+    description: 'Secure trivia demo',
   },
   auth: {
     welcome: 'Welcome to Quad Trivia!',
@@ -43,6 +44,8 @@ export default {
     needsImprovement:'Needs improvement',
     subtitle:'Review your score and the result for each question.',
     finalScore:'Final score',
+    perQuestion:'Per question',
+    evaluatedItems:'Evaluated items',
 
   },
 }

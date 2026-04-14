@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {computed} from 'vue'
-import { onMounted } from 'vue'
+import {computed,onMounted,ref} from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import QuestionCard from '../components/QuestionCard.vue'
@@ -11,7 +10,7 @@ import AppLayout from '../components/AppLayout.vue'
 const { t } = useI18n()
 const quizStore = useQuizStore()
 const router = useRouter()
-var inputError:string = ''
+const inputError =ref('')
 onMounted(async () => {
   if (quizStore.questions.length === 0) {
     await quizStore.fetchQuestions()
@@ -19,22 +18,17 @@ onMounted(async () => {
 })
 const canSubmit = computed(() => {
   if (quizStore.questions.length === 0) return false
-
-  console.log(quizStore.answers);
-  console.log(quizStore.questions);
-  return quizStore.questions.every((question) => {
-    console.log(question.id, quizStore.answers[question.id]);
-    const answer = quizStore.answers[question.id]
+  return quizStore.questions.every((question) => {    const answer = quizStore.answers[question.id]
     return answer !== undefined && answer !== null && answer !== ''
   })
 })
 
 async function onSubmit() {
   if (!canSubmit.value) {
-    inputError = t('quiz.notAllQuestionsAnswered')
+    inputError.value = t('quiz.notAllQuestionsAnswered')
     return
   }
-  inputError = '';
+  inputError.value = '';
   try {
     await quizStore.submitAnswers()
     await router.push(RoutePath.Result)
@@ -53,11 +47,11 @@ async function onSubmit() {
       <p v-else-if="quizStore.error" data-testid="quiz-error">{{ quizStore.error }}</p>
       <form v-else-if="quizStore.questions.length" @submit.prevent="onSubmit">
         <div class="questions">
-          <Question-card v-for="question in quizStore.questions"
+          <QuestionCard v-for="question in quizStore.questions"
                          :key="question.id" :question="question"
                          :selectedOptionId="quizStore.answers[question.id] ?? null"
                          @select="quizStore.setAnswer(question.id, $event)">
-          </Question-card>
+          </QuestionCard>
         </div>
         <button data-testid="quiz-submit" class="primary" type="submit" :disabled="quizStore.loading || !canSubmit">
           {{ t('quiz.submit') }}

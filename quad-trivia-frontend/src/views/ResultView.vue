@@ -31,9 +31,9 @@ const scorePercentage = computed(() => {
 })
 const scoreLabel = computed(() => {
   const percentage = scorePercentage.value
-  if (percentage >= 80) return 'Strong result'
-  if (percentage >= 50) return 'Decent result'
-  return 'Needs improvement'
+  if (percentage >= 80) return t('result.strongResult')
+  if (percentage >= 50) return t('result.decentResult')
+  return t('result.needsImprovement')
 })
 
 const scoreClass = computed(() => {
@@ -69,7 +69,7 @@ function decodeHtml(html: string): string {
               {{ t('result.subtitle') }}
             </p>
           </header>
-          <section class="score-hero" :class="scoreClass">
+          <section class="score-personal" :class="scoreClass">
             <div class="score-copy">
               <p class="score-kicker">
                 {{ t('result.finalScore') }}
@@ -85,8 +85,8 @@ function decodeHtml(html: string): string {
           </section>
           <section class="results-section">
             <div class="section-heading">
-              <h3>Per question</h3>
-              <p>{{ summary.results.length }} evaluated items</p>
+              <h3>{{t('result.perQuestion')}}</h3>
+              <p>{{ summary.results.length }} {{t('result.evaluatedItems')}}</p>
             </div>
             <div class="results-list">
               <article
@@ -105,7 +105,7 @@ function decodeHtml(html: string): string {
                   class="status-pill"
                   :class="item.correct ? 'pill-correct' : 'pill-incorrect'"
                 >
-                  {{ item.correct ? 'Correct' : 'Incorrect' }}
+                  {{ item.correct ? t('result.correct'): t('result.incorrect' )}}
                 </div>
               </article>
             </div>
@@ -119,8 +119,8 @@ function decodeHtml(html: string): string {
 
         </div>
         <div v-else class="empty-state">
-          <h1> t('result.noResult')</h1>
-          <p> t('result.noResult')</p>
+          <h1>{{ t('result.noResult')}}</h1>
+          <p>{{ t('result.noResultText')}}</p>
           <button class="primary-button" type="button" @click="playAgain">
             {{ t('result.playAgain') }}
           </button>
@@ -192,7 +192,7 @@ function decodeHtml(html: string): string {
   line-height: 1.65;
 }
 
-.score-hero {
+.score-personal {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -403,7 +403,7 @@ function decodeHtml(html: string): string {
     border-radius: 22px;
   }
 
-  .score-hero {
+  .score-personal {
     flex-direction: column;
     align-items: flex-start;
     padding: 22px;

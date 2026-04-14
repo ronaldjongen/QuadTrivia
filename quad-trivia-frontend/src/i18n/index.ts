@@ -14,7 +14,7 @@ const savedLocale = canReadStorage
   : null
 const browserLocale = canReadNavigator
   ? globalThis.navigator.language.toLowerCase()
-  : 'en'
+  : 'nl'
 
 const locale =
   savedLocale ??
@@ -23,9 +23,9 @@ const locale =
 export const i18n = createI18n({
   legacy: false,
   locale,
-  fallbackLocale: 'en',
+  fallbackLocale: 'nl',
   messages: {
-    en,
     nl,
+    en,
   },
 })
