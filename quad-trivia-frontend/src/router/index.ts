@@ -14,13 +14,12 @@ const router = createRouter({
     { path: RoutePath.Result, component: ResultView, meta: { requiresAuth: true } },
   ],
 })
-
 // before each route check if user is authenticated if not redirect to login if needed
 router.beforeEach(async (to) => {
   const authStore = useAuthStore()
 
   if (!authStore.initialized) {
-    await authStore.fetchMe()
+    await authStore.bootstrap()
   }
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {

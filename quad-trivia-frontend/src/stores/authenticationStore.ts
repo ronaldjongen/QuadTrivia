@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getLoginResult, login, logout } from '../api/authenticationApi'
+import { getLoginResult, login, logout,ensureCsrf } from '../api/authenticationApi'
 
 interface AuthState {
   username: string | null
@@ -19,6 +19,10 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+    async bootstrap() {
+      await ensureCsrf()
+      await this.fetchMe()
+    },
     async fetchMe() {
       this.loading = true
       this.error = null
@@ -59,6 +63,7 @@ export const useAuthStore = defineStore('auth', {
 
       try {
         await logout()
+        await ensureCsrf()
       } finally {
         this.username = null
         this.isAuthenticated = false

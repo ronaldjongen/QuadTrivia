@@ -13,3 +13,6 @@ export async function getLoginResult(): Promise<LoginResult> {
   const response = await api.get('/auth/me')
   return response.data
 }
+export async function ensureCsrf(): Promise<void> {
+  await api.get('/auth/csrf')
+}
