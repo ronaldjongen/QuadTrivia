@@ -3,13 +3,28 @@
 Vue 3 + TypeScript single-page app for login, quiz flow, and results.
 
 ## Scripts
-
-- `npm run dev`: start local dev server
+- `npm run dev -- --port 5173`: start the local dev server on an unprivileged port
 - `npm run test:unit -- --run`: run unit/integration tests
 - `npm run test:e2e`: run Playwright E2E tests
 - `npm run type-check`: run Vue TypeScript checks
 - `npm run lint`: run lint checks
 - `npm run build`: production build
+
+## Local Development
+
+`npm run dev` uses the checked-in Vite config, which binds the dev server to port `80`.
+That mirrors the Docker/Nginx setup, but on many local machines binding to port `80` is blocked for regular user processes.
+
+For local development, run:
+
+```bash
+cd quad-trivia-frontend
+npm run dev -- --port 5173
+```
+
+This only overrides the port for the current command. It does not change the committed project configuration.
+
+If you need the frontend to reach the backend directly outside Docker/Nginx, proxy `/api` separately or run the full stack through `docker compose`.
 
 ## Architecture
 

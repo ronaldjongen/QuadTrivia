@@ -4,7 +4,12 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/authenticationStore'
 import { RoutePath } from '../router/routePath'
 import { useI18n } from 'vue-i18n'
+const {locale, availableLocales} = useI18n()
 
+function changeLocale(newLocale: string) {
+  locale.value = newLocale
+  localStorage.setItem('locale', newLocale)
+}
 const { t } = useI18n()
 const router = useRouter()
 const authStore = useAuthStore()
@@ -22,6 +27,13 @@ async function onSubmit() {
 </script>
 
 <template>
+  <header>
+    <select :value="locale" @change="changeLocale(($event.target as HTMLSelectElement).value)">
+      <option v-for="lang in availableLocales" :key="lang" :value="lang">
+        {{ lang.toUpperCase() }}
+      </option>
+    </select>
+  </header>
   <section class="login-page">
     <div class="login-shell">
       <aside class="brand-panel">

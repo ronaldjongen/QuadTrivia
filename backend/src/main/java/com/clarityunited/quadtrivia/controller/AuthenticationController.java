@@ -43,13 +43,11 @@ public class AuthenticationController {
             var context = SecurityContextHolder.createEmptyContext();
             context.setAuthentication(authentication);
             SecurityContextHolder.setContext(context);
-            securityContextRepository.saveContext(context, httpRequest, httpResponse);
             var session = httpRequest.getSession(true);
             httpRequest.changeSessionId();
+            securityContextRepository.saveContext(context, httpRequest, httpResponse);
             log.info("Login successful for username='{}' sessionId='{}'",
                     authentication.getName(), session != null ? session.getId() : "none");
-            securityContextRepository.saveContext(context, httpRequest, httpResponse);
-
             return ResponseEntity.ok().build();
         } catch (RuntimeException ex) {
             log.warn("Login failed for username='{}' from ip='{}' reason='{}'",
