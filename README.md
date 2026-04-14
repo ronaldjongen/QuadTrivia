@@ -39,6 +39,13 @@ npm run dev
 
 Frontend uses `/api` as base URL and expects the backend on the same origin in Docker/Nginx mode.
 
+## Authentication Flow
+
+- The backend uses session-based authentication plus CSRF protection for state-changing requests.
+- The frontend bootstraps `GET /api/auth/csrf` before checking `GET /api/auth/me`.
+- `POST /api/auth/login`, `POST /api/auth/logout`, and `POST /api/checkanswers` require the `XSRF-TOKEN` cookie and a matching `X-XSRF-TOKEN` header.
+- Axios is configured with `withCredentials: true`, `xsrfCookieName: XSRF-TOKEN`, and `xsrfHeaderName: X-XSRF-TOKEN`, so the SPA sends the token automatically after bootstrap.
+
 ## Docker Run
 
 1. Create `.env` in project root:
@@ -57,11 +64,23 @@ docker compose up --build
 
 ## API Endpoints
 
+- `GET /api/auth/csrf`
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
 - `GET /api/questions`
 - `POST /api/checkanswers`
+
+Example bootstrap and login sequence for non-browser clients:
+
+```text
+1. GET /api/auth/csrf
+2. Read the `XSRF-TOKEN` cookie from the response
+3. POST /api/auth/login with:
+   - Cookie: `XSRF-TOKEN=<value>`
+   - Header: `X-XSRF-TOKEN: <same cookie value>`
+4. Reuse the returned `JSESSIONID` for authenticated requests
+```
 
 ## Quality Gates
 
@@ -93,9 +112,9 @@ Run this against a running stack (for example after `docker compose up`):
 
 ## Testing Strategy
 
-- Backend unit tests for service, client, DTO, and controller behavior
-- Backend integration test for authenticated quiz flow with session handling
-- Frontend unit/integration tests for stores, views, and router guard
+- Backend unit tests for service, client, DTO, controller, and auth endpoint behavior
+- Backend integration test for authenticated quiz flow with CSRF bootstrap plus session handling
+- Frontend unit/integration tests for stores, views, router guard, and CSRF bootstrap logic
 
 ## Security Notes
 

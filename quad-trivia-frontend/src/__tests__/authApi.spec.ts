@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { getLoginResult, login, logout } from '../api/authenticationApi'
+import { ensureCsrf, getLoginResult, login, logout } from '../api/authenticationApi'
 import { api } from '../api/client'
 
 // Mock the api client
@@ -52,5 +52,13 @@ describe('authenticationApi - login/logout', () => {
     await logout()
 
     expect(api.post).toHaveBeenCalledWith('/auth/logout')
+  })
+
+  it('ensureCsrf should fetch csrf token endpoint', async () => {
+    vi.mocked(api.get).mockResolvedValue({} as Awaited<ReturnType<typeof api.get>>)
+
+    await ensureCsrf()
+
+    expect(api.get).toHaveBeenCalledWith('/auth/csrf')
   })
 })

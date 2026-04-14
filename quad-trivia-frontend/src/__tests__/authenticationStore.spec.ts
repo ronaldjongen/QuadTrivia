@@ -4,6 +4,7 @@ import { useAuthStore } from '../stores/authenticationStore'
 import * as authApi from '../api/authenticationApi'
 
 vi.mock('../api/authenticationApi', () => ({
+  ensureCsrf: vi.fn(),
   getLoginResult: vi.fn(),
   login: vi.fn(),
   logout: vi.fn(),
@@ -45,6 +46,23 @@ describe('authenticationStore', () => {
     expect(store.isAuthenticated).toBe(false)
     expect(store.initialized).toBe(true)
     expect(store.loading).toBe(false)
+  })
+
+  it('bootstrap primes csrf token before reading auth state', async () => {
+    vi.mocked(authApi.ensureCsrf).mockResolvedValue(undefined)
+    vi.mocked(authApi.getLoginResult).mockResolvedValue({
+      username: 'alice',
+      isAuthenticated: true,
+    })
+
+    const store = useAuthStore()
+
+    await store.bootstrap()
+
+    expect(authApi.ensureCsrf).toHaveBeenCalledTimes(1)
+    expect(authApi.getLoginResult).toHaveBeenCalledTimes(1)
+    expect(store.isAuthenticated).toBe(true)
+    expect(store.initialized).toBe(true)
   })
 
   it('login authenticates user by posting credentials and then refreshing profile', async () => {
@@ -93,5 +111,21 @@ describe('authenticationStore', () => {
     expect(store.isAuthenticated).toBe(false)
     expect(store.loading).toBe(false)
     expect(store.error).toBeNull()
+  })
+
+  it('logout re-primes csrf token after successful logout', async () => {
+    vi.mocked(authApi.logout).mockResolvedValue(undefined)
+    vi.mocked(authApi.ensureCsrf).mockResolvedValue(undefined)
+
+    const store = useAuthStore()
+    store.username = 'alice'
+    store.isAuthenticated = true
+
+    await store.logout()
+
+    expect(authApi.logout).toHaveBeenCalledTimes(1)
+    expect(authApi.ensureCsrf).toHaveBeenCalledTimes(1)
+    expect(store.username).toBeNull()
+    expect(store.isAuthenticated).toBe(false)
   })
 })

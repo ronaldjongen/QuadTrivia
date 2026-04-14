@@ -6,6 +6,7 @@ import * as authApi from '../api/authenticationApi'
 import { RoutePath } from '../router/routePath'
 
 vi.mock('../api/authenticationApi', () => ({
+  ensureCsrf: vi.fn(),
   getLoginResult: vi.fn(),
   login: vi.fn(),
   logout: vi.fn(),
@@ -19,6 +20,7 @@ describe('router auth guard', () => {
   })
 
   it('redirects unauthenticated users away from protected quiz route', async () => {
+    vi.mocked(authApi.ensureCsrf).mockResolvedValue(undefined)
     vi.mocked(authApi.getLoginResult).mockResolvedValue({
       username: null,
       isAuthenticated: false,
@@ -29,10 +31,12 @@ describe('router auth guard', () => {
 
     await router.push(RoutePath.Quiz)
 
+    expect(authApi.ensureCsrf).toHaveBeenCalled()
     expect(router.currentRoute.value.path).toBe(RoutePath.Login)
   })
 
   it('redirects authenticated users away from login route', async () => {
+    vi.mocked(authApi.ensureCsrf).mockResolvedValue(undefined)
     vi.mocked(authApi.getLoginResult).mockResolvedValue({
       username: 'demo',
       isAuthenticated: true,
@@ -44,6 +48,7 @@ describe('router auth guard', () => {
     await router.push(RoutePath.Quiz)
     await router.push(RoutePath.Login)
 
+    expect(authApi.ensureCsrf).toHaveBeenCalled()
     expect(router.currentRoute.value.path).toBe(RoutePath.Quiz)
   })
 })
