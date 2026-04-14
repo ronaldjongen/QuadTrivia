@@ -63,7 +63,7 @@ async function onSubmit() {
         <form class="login-card" @submit.prevent="onSubmit">
           <div class="card-header">
             <p class="card-kicker">{{ t('auth.welcome') }}</p>
-            <h2>Start de demo</h2>
+            <h2>{{t ('auth.startDemo')}}</h2>
             <p class="card-copy">
               {{t('auth.intro') }}
             </p>

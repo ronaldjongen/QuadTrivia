@@ -23,6 +23,8 @@ export default {
     brandJWT:'Secure session auth',
     brandServerSide:'Server-side validation',
     brandCleanFlow:'Clean demo flow',
+    startDemo:'Start de demo',
+
   },
   quiz: {
     title: 'Trivia Quiz',
