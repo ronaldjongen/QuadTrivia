@@ -4,7 +4,64 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4c1cc19-8a5d-495b-b982-dfe0101722cf" name="Changes" comment="chore: fix workspace.xml" />
+    <list default="true" id="b4c1cc19-8a5d-495b-b982-dfe0101722cf" name="Changes" comment="chore:add backend">
+      <change afterPath="$PROJECT_DIR$/backend/backend/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/QuadTriviaApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaCache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaQuestion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/controller/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/controller/QuizController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/dto/assesment/AnswerAssessmentResultDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/dto/assesment/CheckAnswersResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/dto/authentication/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/dto/authentication/LoginResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/dto/quiz/QuizResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/dto/quizanswer/SubmittedAnswerDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/dto/quizanswer/SubmittedQuizAnswerRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/exception/ApiExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/exception/QuizSessionNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/exception/QuizSessionOwnershipException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/model/QuizSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/model/TriviaOption.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/model/TriviaQuestion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/security/AppSecurityProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/security/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/service/QuizService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/QuadTriviaApplicationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaCacheTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaClientConfigTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaClientTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaQuestionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaResponseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/controller/AuthenticationControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/controller/QuizControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/controller/QuizFlowIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/dto/assesment/AnswerAssessmentResultDtoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/dto/assesment/CheckAnswersResponseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/dto/authentication/LoginRequestTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/dto/authentication/LoginResultTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/dto/quiz/QuizResponseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/dto/quizanswer/SubmittedAnswerDtoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/dto/quizanswer/SubmittedQuizAnswerRequestTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/model/QuizSessionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/model/TriviaOptionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/model/TriviaQuestionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/security/PasswordHashGeneratorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/src/test/java/com/clarityunited/quadtrivia/service/QuizServiceTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -211,7 +268,7 @@
       <workItem from="1775651163123" duration="4317000" />
       <workItem from="1775677019067" duration="8645000" />
       <workItem from="1775806239118" duration="18116000" />
-      <workItem from="1776097461761" duration="10615000" />
+      <workItem from="1776097461761" duration="10926000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project structure with backend and frontend setup&#10;&#10;Added initial files for the backend (using Spring Boot) and frontend (Vue.js) including APIs, basic components, data types, and configurations. Setup Gradle and Docker configurations for backend and frontend environments.">
       <option name="closed" value="true" />
@@ -431,8 +488,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initialize Vue 3 frontend with Vite, Pinia, Vue Router, and ESLint configurations." />
-    <MESSAGE value="Implement backend security, frontend routing, and Docker setup&#10;&#10;Added Spring Security configurations, APIs for authentication and quizzes, and Vue 3 routes with centralized paths. Introduced Docker settings for backend and frontend, and integrated Nginx as a reverse proxy. Updated folder structure and dependencies to improve modularity." />
     <MESSAGE value="Redesign login page with enhanced UI/UX, dynamic error handling, and responsive styling. Fix typo in onSubmit method name." />
     <MESSAGE value="correct password" />
     <MESSAGE value="chore: add .gitignore" />
@@ -456,7 +511,9 @@
     <MESSAGE value="Refactor `ResultView` test: update `t` function mock to use stricter typing" />
     <MESSAGE value="chore: fix test using login" />
     <MESSAGE value="chore: fix workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: fix workspace.xml" />
+    <MESSAGE value="Chore :add backend" />
+    <MESSAGE value="chore:add backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore:add backend" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
