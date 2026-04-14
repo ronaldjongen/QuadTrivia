@@ -19,7 +19,10 @@ export default {
     ,
     brandPointJWT:'No JWT in the browser storage.',
     brandPointServerSide:'Correct answers stay in the backend.',
-    brandPointnCleanFlow:'Login, quiz, result.'
+    brandPointCleanFlow:'Login, quiz, result.',
+    brandJWT:'Secure session auth',
+    brandServerSide:'Server-side validation',
+    brandCleanFlow:'Clean demo flow',
   },
   quiz: {
     title: 'Trivia Quiz',

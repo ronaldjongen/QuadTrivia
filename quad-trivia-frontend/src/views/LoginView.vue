@@ -25,24 +25,24 @@ async function onSubmit() {
   <section class="login-page">
     <div class="login-shell">
       <aside class="brand-panel">
-        <p class="eyebrow">Quad Trivia</p>
-        <h1>Secure trivia demo</h1>
+        <p class="eyebrow">{{ t('app.title') }}</p>
+        <h1>{{t('app.description')}}</h1>
         <p class="brand-copy">
           {{t('auth.brand') }}
         </p>
 
         <div class="brand-points">
           <div class="point">
-            <strong>Secure session auth</strong>
+            <strong>{{ t('auth.brandJWT') }}</strong>
             <span>{{ t('auth.brandPointJWT') }}</span>
           </div>
           <div class="point">
-            <strong>Server-side validation</strong>
+            <strong>{{ t('auth.brandServerSide') }}</strong>
             <span>{{ t('auth.brandPointServerSide') }}</span>
           </div>
           <div class="point">
             <strong>Clean demo flow</strong>
-            <span>{{ t('auth.brandPointnCleanFlow') }}</span>
+            <span>{{ t('auth.brandPointCleanFlow') }}</span>
           </div>
         </div>
       </aside>
@@ -63,7 +63,7 @@ async function onSubmit() {
               data-testid="login-username"
               v-model="form.username"
               type="text"
-              autocomplete="{{t('auth.username')}}"
+              autocomplete="username"
               placeholder="demo"
             />
           </label>

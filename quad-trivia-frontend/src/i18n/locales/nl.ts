@@ -19,7 +19,10 @@ export default {
       '          en session-based authentication.',
     brandPointJWT:'Geen JWT in de browseropslag.',
     brandPointServerSide:'Correcte antwoorden blijven in de backend.',
-    brandPointnCleanFlow:'Login, quiz, resultaat.'
+    brandPointCleanFlow:'Login, quiz, resultaat.',
+    brandJWT:'Secure session auth',
+    brandServerSide:'Server-side validation',
+    brandCleanFlow:'Clean demo flow',
   },
   quiz: {
     title: 'Trivia Quiz',

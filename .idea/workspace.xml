@@ -18,10 +18,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4c1cc19-8a5d-495b-b982-dfe0101722cf" name="Changes" comment="">
+    <list default="true" id="b4c1cc19-8a5d-495b-b982-dfe0101722cf" name="Changes" comment="chore:remove readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/client/opentrivia/OpenTriviaClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/src/main/java/com/clarityunited/quadtrivia/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quad-trivia-frontend/src/i18n/locales/en.ts" beforeDir="false" afterPath="$PROJECT_DIR$/quad-trivia-frontend/src/i18n/locales/en.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quad-trivia-frontend/src/i18n/locales/nl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/quad-trivia-frontend/src/i18n/locales/nl.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quad-trivia-frontend/src/views/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/quad-trivia-frontend/src/views/LoginView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,12 +94,12 @@
     &quot;assignee&quot;: &quot;ronaldjongen&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ronaldjongen/QuadTrivia.git&quot;,
-    &quot;accountId&quot;: &quot;7697116c-55f9-4d5c-a2dc-44b6d1e667e6&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:ronaldjongen/QuadTrivia.git",
+    "accountId": "7697116c-55f9-4d5c-a2dc-44b6d1e667e6"
   }
-}</component>
+}]]></component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -231,6 +232,7 @@
       <workItem from="1775677019067" duration="8645000" />
       <workItem from="1775806239118" duration="18116000" />
       <workItem from="1776097461761" duration="12457000" />
+      <workItem from="1776170589298" duration="1046000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project structure with backend and frontend setup&#10;&#10;Added initial files for the backend (using Spring Boot) and frontend (Vue.js) including APIs, basic components, data types, and configurations. Setup Gradle and Docker configurations for backend and frontend environments.">
       <option name="closed" value="true" />
@@ -432,7 +434,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776168452035</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="chore:remove readme">
+      <option name="closed" value="true" />
+      <created>1776170827082</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1776170827082</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +460,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: add .gitignore" />
     <MESSAGE value="refactor: update LoginResult type and clean up commented code in authentication logic" />
     <MESSAGE value="Refactor `LoginResult` field name, add unit tests for `QuizController` and `AuthenticationController`, and optimize service and controller constructors with Lombok" />
     <MESSAGE value="Refactor layout structure by introducing `AppLayout` component and enhance HTML decoding in `QuestionCard` and `ResultView`." />
@@ -475,7 +484,8 @@
     <MESSAGE value="chore:add backend" />
     <MESSAGE value="Add backend project to the repository" />
     <MESSAGE value="chore remove dummy project stuuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="chore:remove readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore:remove readme" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
