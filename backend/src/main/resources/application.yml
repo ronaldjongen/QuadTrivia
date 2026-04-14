@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: QuadTrivia-Backend
+server:
+  port: 8080
+
+app:
+  trivia:
+    base-url: https://opentdb.com
+    cache-file: trivia-cache.yaml
+  quiz:
+    session-ttl: 15m
+  security:
+    demo-username: demo
+    demo-password-hash: ${APP_DEMO_PASSWORD_HASH}
